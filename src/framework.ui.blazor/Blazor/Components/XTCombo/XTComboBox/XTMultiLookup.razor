@@ -1,0 +1,66 @@
+﻿@namespace Framework.Web.Blazor.Components.XT
+@typeparam TEntity
+@inherits XTComponentBase
+
+
+<EjsMultiSelect Value="@InternalValue"
+                AllowFiltering=true
+                IgnoreAccent=true
+                CssClass="@CssClass"
+                FloatLabelType="@FloatLabelType.Auto"
+                Placeholder="@Caption"
+                TValue="string[]"
+                Mode="VisualMode.CheckBox"
+                DataSource="@DataSource">
+    <MultiSelectEvents TValue="string[]" ValueChange="OnChange" ></MultiSelectEvents>
+    <MultiSelectFieldSettings Text="Text" Value="Key"></MultiSelectFieldSettings>
+</EjsMultiSelect>
+
+@code
+{
+    internal string[] InternalValue = new string[] { };
+    internal List<TEntity> Entities;
+
+    [Parameter] public List<DataItemCombo> DataSource { get; set; } = new List<DataItemCombo>();
+    [Parameter] public EventCallback<List<TEntity>> ValueChanged { get; set; }
+    [Parameter] public object Value  { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+
+        var data = Value.To<List<TEntity>>();
+        var ids = new List<string>();
+        foreach (var item in data)
+        {
+            var record = item as IEntity<int>;
+            var id = record.Id.ToString();
+            ids.Add(id);
+        }
+        InternalValue = ids.ToArray();
+        if (!DataSource.Any())
+        {
+            DataSource = await LookupService.GetLookUpAsync<TEntity>();
+        }
+        await base.OnParametersSetAsync();
+    }
+    void LoadData()
+    {
+
+
+    }
+
+    private void OnChange(MultiSelectChangeEventArgs<string[]> args)
+    {
+        Entities = new List<TEntity>();
+
+        foreach (var id in args.Value)
+        {
+            var record = (TEntity)DataSource.FirstOrDefault(f => f.Key == id.ToInt()).Value;
+            Entities.Add(record);
+        }
+        ValueChanged.InvokeAsync(Entities);
+        StateHasChanged();
+
+    }
+
+}

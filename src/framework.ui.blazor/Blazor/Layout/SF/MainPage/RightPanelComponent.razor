@@ -1,0 +1,72 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@using Syncfusion.EJ2.Blazor.Navigations;
+@using Microsoft.AspNetCore.Components;
+@inject IJSRuntime JsRuntime;
+@inherits ComponentBase;
+@implements System.IDisposable
+
+<XTPanelRight>
+    <XTOverlayContent />
+    <XTPanelCenter>
+        <BreadCrumbComponent @ref="BreadCrumbObj"></BreadCrumbComponent>
+        <div class="control-fluid">
+            <div class="container-fluid">
+                <div id="control-content">
+                    @Body
+                </div>
+            </div>
+        </div>
+        <div class='description-section sb-rightpane-padding'>
+
+        </div>
+        <div class="sb-footer">
+            <div class="sb-footer-left">
+                <div class="sb-footer-links">
+
+                </div>
+                <div class="sb-footer-copyright">@CopyRight</div>
+            </div>
+            <div class="sb-footer-logo">
+                @*<a href="https://www.syncfusion.com/" target="_blank">
+                        <div class="sb-footer-logo-icon"></div>
+                    </a>*@
+            </div>
+        </div>
+
+    </XTPanelCenter>
+</XTPanelRight>
+
+
+
+@code {
+
+    [Parameter]
+    public RenderFragment Body { get; set; }
+    public string CopyRight { get; set; }
+    public BreadCrumbComponent BreadCrumbObj { get; set; }
+
+    public void UpdateBreadCrumb(string control, string category, string sample)
+    {
+        this.BreadCrumbObj.UpdatePath(control, category, sample);
+    }
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+
+
+    }
+
+    protected override void OnInitialized()
+    {
+        var year = DateTime.Now.ToString("yyyy");
+        this.CopyRight = "Copyright © 2020 - " + year + " Orion Sistemas LTDA.";
+    }
+
+    public void Dispose()
+    {
+
+
+    }
+
+}

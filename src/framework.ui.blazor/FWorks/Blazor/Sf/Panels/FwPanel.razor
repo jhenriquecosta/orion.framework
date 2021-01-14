@@ -1,0 +1,38 @@
+﻿
+@inherits FwBasePanel
+    <Indicator IndicatorContext="on-fwpanel-context">
+        <ErrorContent Context="t">
+            <p>Error: @t.Exception.Message</p>
+            <button class="btn btn-primary" @onclick="@t.DismissException">Dismiss</button>
+        </ErrorContent>
+        <ChildContent>
+            <Card ColumnSize="@SizeColumn" Margin="@SizeMargin">
+                <CardHeader Padding="Padding.Is1.FromBottom">
+                    @if (!Title.IsEmpty())
+                    {
+                        <CardTitle Size="4">@Title</CardTitle>
+                    }
+                    @if (!SubTitle.IsEmpty())
+                    {
+                        <CardSubtitle Size="3">@SubTitle</CardSubtitle>
+                    }
+                </CardHeader>
+                @if (Top != null)
+                {
+                    <CardBody Padding="Padding.Is1.OnX">
+                        @Top
+                    </CardBody>
+                }
+                <CardBody Padding="Padding.Is1.OnX">
+                    @ChildContent
+                </CardBody>
+
+                @if (Bottom != null)
+                {
+                    <CardFooter Padding="Padding.Is1.OnX">>
+                        @Bottom
+                    </CardFooter>
+                }
+            </Card>
+        </ChildContent>
+    </Indicator>

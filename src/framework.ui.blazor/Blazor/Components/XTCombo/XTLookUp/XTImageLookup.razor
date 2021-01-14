@@ -1,0 +1,77 @@
+﻿@namespace Framework.Web.Blazor.Components.XT
+
+
+<SelectEdit TValue="object" SelectedValue="@Value" SelectedValueChanged="@HandleValueChanged">
+    @if (DataSource != null)
+    {
+        foreach (var item in DataSource)
+        {
+            var text = item.Text; //TextField?.Invoke(item);
+            var value = item.Key;  //ValueField?.Invoke(item);
+
+            <SelectItem TValue="int" Value="@value" Class="@item.Text">@text</SelectItem>
+        }
+    }
+    @ChildContent
+</SelectEdit>
+@code
+{
+    object internalValue { get; set; }
+    DataItem selectedRow;
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public bool UseValueFromText { get; set; }
+    [Parameter] public string FieldLabel { get; set; }
+    [Parameter] public IEnumerable<DataItem> DataSource { get; set; } = new List<DataItem>();
+    [Parameter] public EventCallback<object> ValueChanged { get; set; }
+    [Parameter]
+    public object Value
+    {
+        get => internalValue;
+        set
+        {
+            internalValue = value;
+            //   selectedRow = GetValue(value);
+        }
+    }
+    [Parameter] public EventCallback<DataItem> SelectedRow { get; set; }
+
+
+    protected Task HandleValueChanged(object value)
+    {
+        Value = value;
+        HandleSelectedRow();
+        return ValueChanged.InvokeAsync(value);
+
+    }
+    protected Task HandleSelectedRow()
+    {
+        var data = GetValue(internalValue);
+        return SelectedRow.InvokeAsync(data);
+    }
+
+    DataItem GetValue(object data)
+    {
+        object id = data.ToString().ToInt();
+        var searchValue = DataSource.FirstOrDefault(f => f.Key.Equals(id)) ?? new DataItem();
+        if (searchValue.Text.IsEmpty())
+        {
+            searchValue.Text = "Item Não Encontrado!";
+        }
+        return searchValue;
+    }
+
+    //protected override async Task OnInitializedAsync()
+    //{
+
+    //    await ValueChanged.InvokeAsync(Value);
+
+    //}
+    //EventCallback<object> SelectedChanged
+    //{
+    //    get
+    //    {
+    //        return selectedItem;
+    //    }
+
+    //}
+}

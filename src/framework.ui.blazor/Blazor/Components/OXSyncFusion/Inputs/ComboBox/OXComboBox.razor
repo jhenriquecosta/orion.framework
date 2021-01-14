@@ -1,0 +1,21 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components.OXSyncFusion
+@typeparam TValue
+@typeparam TEntity
+@inherits OXComboBase<TEntity, TValue>
+<SfComboBox  
+             Placeholder="@Caption"
+             Value="@InternalValue"
+             DataSource="@DataSource"
+             Readonly="@(!AllowEdit)"
+             AllowFiltering="@AllowFiltering"
+             IgnoreAccent="@IgnoreAccent"
+             CssClass="@CssClass"
+             FloatLabelType="@FloatLabel">
+
+    <ComboBoxEvents TValue="int?"
+                    ValueChange="OnValueChanged">
+    </ComboBoxEvents>
+    <ComboBoxFieldSettings Text="@FieldText"
+                           Value="@FieldValue">
+    </ComboBoxFieldSettings>
+</SfComboBox>

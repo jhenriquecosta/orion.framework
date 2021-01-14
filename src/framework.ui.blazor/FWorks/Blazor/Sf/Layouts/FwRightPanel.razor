@@ -1,0 +1,76 @@
+﻿ 
+
+    <div class='sb-right-pane e-view' id='right-pane'>
+        <FwSpinner HideClass="sb-hide"></FwSpinner>
+        <SfLayout Class="SFClass.PanelCenter">
+
+            <FwBreadCrumb @ref="BreadCrumbObj"></FwBreadCrumb>
+            @*<div class='description-section sb-rightpane-padding'>
+            </div>*@
+
+            @*Conteudo*@
+
+            <div id="sb-content" class='sb-content-section'>
+                @*<div class="control-fluid">
+                     <div class="container-fluid">
+                          <div id="control-content">
+
+                          </div>
+                     </div>
+                </div>*@
+                @Body
+            </div>
+
+            <div class='description-section sb-rightpane-padding'>
+            </div>
+            <div class="sb-footer">
+                <div class="sb-footer-left">
+                    <div class="sb-footer-links">
+
+                    </div>
+                    <div class="sb-footer-copyright">@CopyRight</div>
+                </div>
+                <div class="sb-footer-logo">
+
+                </div>
+            </div>
+
+        </SfLayout>
+      </div>
+
+
+
+        @code
+{
+
+            public string CopyRight { get; set; }
+
+            [Parameter]
+            public RenderFragment Body { get; set; }
+            public FwBreadCrumb BreadCrumbObj { get; set; }
+
+            public void UpdateBreadCrumb(string control, string category, string sample)
+            {
+                this.BreadCrumbObj.UpdatePath(control, category, sample);
+            }
+
+
+            protected override void OnAfterRender(bool firstRender)
+            {
+
+
+            }
+
+            protected override void OnInitialized()
+            {
+                var year = DateTime.Now.ToString("yyyy");
+                this.CopyRight = "Copyright © 2020 - " + year + " Orion Sistemas LTDA.";
+            }
+
+            public void Dispose()
+            {
+
+
+            }
+
+        }

@@ -1,0 +1,123 @@
+﻿@typeparam TEntity
+@inherits XTComponentBase
+@namespace Framework.Web.Blazor.Components.XT
+
+
+@*<EjsDropDownList FloatLabelType="@FloatLabelType.Always" AllowFiltering=true IgnoreAccent=true CssClass="@CssClass"
+                 Placeholder="@Placeholder" Value="@InternalValue" DataSource="@DataSource">
+    <DropDownListEvents TValue="int" ValueChange="OnValueChanged"></DropDownListEvents>
+    <DropDownListFieldSettings Text="@FieldText" Value="@FieldValue"></DropDownListFieldSettings>
+</EjsDropDownList>*@
+@if (_dataSource != null)
+{
+    <EjsComboBox
+                 Placeholder="@Placeholder"
+                 Value="@InternalValue" 
+                 DataSource="@DataSource"
+                 AllowFiltering=true
+                 IgnoreAccent=true 
+                 CssClass="@CssClass"
+                 FloatLabelType ="@FloatLabelType.Always">
+        <ComboBoxEvents 
+                 TValue="int?" 
+                 ValueChange="OnValueChanged">
+        </ComboBoxEvents>
+        <ComboBoxFieldSettings 
+                 Text="@FieldText" 
+                 Value="@FieldValue">
+        </ComboBoxFieldSettings>
+    </EjsComboBox>
+}
+@code
+{
+    private static bool isLoading = false;
+    private static IEnumerable<DataItemCombo> _dataSource;
+    internal int InternalValue { get; set; }
+   
+
+    [Parameter] public string FieldText { get; set; } = "Text";
+    [Parameter] public string FieldValue { get; set; } = "Key";
+    [Parameter] public bool ConvertTo { get; set; } = true;
+
+    [Parameter] public IEnumerable<DataItemCombo> DataSource { get; set; }
+    [Parameter] public EventCallback<TEntity> ValueChanged { get; set; }
+    [Parameter] public EventCallback<DataItemCombo> GetDataItem { get; set; }
+    [Parameter] public object Value  { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        await BuildDataSourceAsync();
+        await base.OnInitializedAsync();
+    }
+    protected async Task BuildDataSourceAsync()
+    {
+        if (_dataSource == null)
+        {
+            if (DataSource == null) DataSource = new List<DataItemCombo>();
+
+            if (!DataSource.Any())
+            {
+                if (typeof(TEntity).IsEnum)
+                {
+                    var lstData = System.Enum.GetNames(typeof(TEntity))
+                    .ToDictionary(key => Framework.Web.Helpers.Enum.GetValue<TEntity>(key), value => Framework.Web.Helpers.Enum.GetDescription<TEntity>(value))
+                    .ToList().Select(x => new DataItemCombo { Key = x.Key, Text = x.Value, Value = x.Key }).ToList();
+                    DataSource = lstData;
+                }
+                else
+                {
+                    DataSource = await LookupService.GetLookUpAsync<TEntity>();
+                }
+            }
+            _dataSource = DataSource;
+            isLoading = true;
+        }
+        else
+        {
+            DataSource = _dataSource;
+        }
+
+
+    }
+    protected override void OnParametersSet()
+    {
+        if (Value == null) Value = 0;    //Value.To<int>();
+        if (Value.To<int>() > 0) InternalValue = Value.To<int>();
+
+    }
+
+    private void OnValueChanged(Syncfusion.EJ2.Blazor.DropDowns.ChangeEventArgs<int?> args)
+    {
+        if (args.Value != null)
+        {
+            if (args.Value > 0)
+            {
+                var rsFound = DataSource.FirstOrDefault(f => f.Key == args.Value);
+                if (rsFound != null)
+                {
+                    if (ConvertTo)
+                    {
+                        var record = (TEntity)rsFound.Value;
+                        ValueChanged.InvokeAsync(record);
+                    }
+                    GetDataItem.InvokeAsync(rsFound);
+                }
+                else
+                {
+                    ValueChanged.InvokeAsync(default(TEntity));
+                }
+            }
+            else
+            {
+                ValueChanged.InvokeAsync(default(TEntity));
+            }
+        }
+        else
+        {
+
+            ValueChanged.InvokeAsync(default(TEntity));
+
+        }
+        this.StateHasChanged();
+    }
+
+}

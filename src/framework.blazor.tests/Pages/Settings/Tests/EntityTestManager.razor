@@ -1,0 +1,56 @@
+﻿
+@namespace Orion.Prometheus.Blazor.Pages
+@page "/settings/entitytest/manager"
+@inherits OXPageModel<EntityTest, DbDao<EntityTest>>
+
+
+<OXPanel Title="ENTITY TESTS" SubTitle="Cria/Edita/Exclui registros">
+    <Row>
+        <OXGrid @ref="GridView"
+                DataSource="GetAll"
+                TModel="EntityTest"
+                AllowButtons="true"
+                AllowPrint="true"
+                OnAdd="@((value) => this.ShowDialog(null, OxActionModel.New))"
+                OnEdit="@((value) => this.ShowDialog(value, OxActionModel.Edit))"
+                OnRemove="@((value) => this.ShowDialog(value, OxActionModel.Delete))">
+        </OXGrid>
+    </Row>
+</OXPanel> 
+<OXModal @ref="ModalEdit" Caption="@Caption">
+    <OXForm ActionModel="@ActionModel" OnResetClick="@(() => OnHideModal(ModalEdit))" OnDeleteClick="@(() => OnDeleteAsync())" OnSaveClick="@(() => OnSaveOrUpdateAsync())">
+        <br />
+        <Fields>
+            <Field>
+                Id:<b>@PageModel?.Id</b>
+                <b>Informe os dados corretamente</b>
+            </Field>
+        </Fields>
+
+        <Fields>
+            <Field ColumnSize="ColumnSize.Is4.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Sistema" @bind-Value="@PageModel.IdInterno"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is8.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Nome" @bind-Value="@PageModel.Nome"></OXTextEdit>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.IsFull.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Descrição" @bind-Value="@PageModel.Descricao"></OXTextEdit>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.Is4.OnDesktop.IsHalf.OnMobile">
+                <SfCheckBox Label="Ativo ?" @bind-Checked="@PageModel.IsEnabled"></SfCheckBox>
+            </Field>
+        </Fields>
+    </OXForm>
+</OXModal>
+
+
+@code
+{
+
+    protected EntityTestEdit entityEdit { get; set; }
+}

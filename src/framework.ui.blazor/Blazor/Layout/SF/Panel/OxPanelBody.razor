@@ -1,0 +1,25 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@*<div id="sb-content" class='sb-content-section'>
+        <div class="e-content sb-sample-content-area">
+            <div class='sb-demo-section'>
+                <div class="control-fluid">
+                    <div class="container-fluid">
+                        @ChildContent
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div id="sb-content" class='sb-content-section'>
+    <div class="control-fluid">
+        <div class="container-fluid">
+            @ChildContent
+        </div>
+    </div>
+</div>
+
+@code
+{
+    [Parameter] public RenderFragment ChildContent { get; set; }
+}

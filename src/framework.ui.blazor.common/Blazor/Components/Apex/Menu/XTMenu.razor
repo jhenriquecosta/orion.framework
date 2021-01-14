@@ -1,0 +1,44 @@
+﻿@namespace Framework.Web.Blazor.Components.Apex
+
+@if (ChildContent != null)
+{
+    <div class="nav-container">
+        <ul id="main-menu-navigation" data-menu="menu-navigation" data-scroll-to-active="true" class="navigation navigation-main">
+            @ChildContent
+        </ul>
+    </div>
+}
+else
+{
+    <div class="nav-container">
+        <ul id="main-menu-navigation" data-menu="menu-navigation" data-scroll-to-active="true" class="navigation navigation-main">
+            @foreach (var item in MenuBuilder.Build(x => x.Position))
+            {
+                @if (item.IsSubMenu && item.IsVisible)
+                {
+                    <XTSubMenu Caption="@item.Caption" Icon="@item.Icon" IsEnabled="@item.IsEnabled" MenuItems="@item.MenuItems.Build(x => x.Position)" />
+                }
+                else if (!item.IsSubMenu && item.IsVisible)
+                {
+                    <XTMenuItem MenuItem="@item" IsEnabled="@item.IsEnabled" />
+                }
+            }
+        </ul>
+    </div>
+}
+
+@code
+{
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public MenuBuilder MenuBuilder { get; set; }
+    [Parameter] public string Css { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (ChildContent != null && MenuBuilder != null)
+        {
+            throw new InvalidOperationException($"Cannot use child content and menu builder together");
+        }
+    }
+
+}

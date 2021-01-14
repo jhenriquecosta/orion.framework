@@ -1,0 +1,55 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@inherits XTComponentBase
+@typeparam TValue
+
+<EjsNumericTextBox @ref="objEditNumber" 
+                   OnInput="OnValueChanged"
+                   CssClass="@FieldCssClass"
+                   ShowSpinButton=false
+                   TValue="TValue" 
+                   Format="@Format" 
+                   Value="Value"
+                   Placeholder="@Caption"
+                   Decimals="@Decimals"
+                   FloatLabelType="@FieldFloatLabel">
+
+    @*<NumericTextBoxEvents TValue="TValue" ValueChange="OnValueChange"></NumericTextBoxEvents>*@
+</EjsNumericTextBox>
+
+ 
+
+@code
+{
+    EjsNumericTextBox<TValue> objEditNumber;
+    [Parameter] public string Format { get; set; } = "n0";
+    [Parameter] public TValue Value { get; set; }
+    [Parameter] public int Decimals { get; set; } = 0;
+    [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
+
+    protected override Task OnParametersSetAsync()
+    {
+
+        if ( typeof(TValue) == typeof(decimal?) || typeof(TValue) == typeof(decimal))
+        {
+            this.Format = "C2";
+            this.Decimals = 2;
+        }
+        return base.OnParametersSetAsync();
+    }
+    private Task OnValueChanged(Microsoft.AspNetCore.Components.ChangeEventArgs e)
+    {
+        this.Value = e.Value.To<TValue>();
+        return ValueChanged.InvokeAsync(this.Value);
+    }
+
+
+    //protected async Task OnValueChange(Syncfusion.EJ2.Blazor.Inputs.ChangeEventArgs args)
+    //{
+    //    var value = args.Value;
+    //    var data = value.To<TValue>();
+    //    await ValueChanged.InvokeAsync(data);
+    //    StateHasChanged();
+
+    //}
+
+}

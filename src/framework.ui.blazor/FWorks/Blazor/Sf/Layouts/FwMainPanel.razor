@@ -1,0 +1,13 @@
+﻿<FwSpinner @ref="SpinnerObj"></FwSpinner>
+<SfLayout Class="SFClass.Main">
+    <SfLayout Class="SFClass.MobileOverlay" Hide="true" />
+    @ChildContent
+</SfLayout>
+
+@code
+{
+    public FwSpinner SpinnerObj { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

@@ -1,0 +1,43 @@
+﻿
+@namespace Orion.Prometheus.Blazor.Pages
+@page "/tests/grupo/manager"
+@inherits OXPageModel<GrupoTests, DbDao<GrupoTests>>
+
+<OXPanel Title="Grupo" SubTitle="Cria/Edita/Exclui Grupo">
+    <Row>
+        <OXGrid @ref="GridView"
+                    TModel="GrupoTests"
+                    DataSource="GetAll"
+                    AllowButtons="true"
+                    AllowPrint="true"
+                    AllowFilter="true"
+                    OnAdd="@(()=> this.ShowDialog(null,OxActionModel.New))"
+                    OnEdit="@((value) => this.ShowDialog(value,OxActionModel.Edit))"
+                    OnRemove="@((value) => this.ShowDialog(value,OxActionModel.Delete))">
+        </OXGrid>
+    </Row>
+</OXPanel>
+
+<OXModal @ref="ModalEdit" Caption="@Caption">
+    <OXForm ActionModel="@ActionModel" OnResetClick="@(() => OnHideModal(ModalEdit))" OnDeleteClick="@(() => OnDeleteAsync())" OnSaveClick="@(() => OnSaveOrUpdateAsync())">
+        <br />
+        <Fields>
+            <Field>
+                Id:<b>@PageModel?.Id</b>
+                <b>Informe os dados corretamente</b>
+            </Field>
+        </Fields>
+       
+        <Fields>
+            <Field ColumnSize="ColumnSize.IsFull.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Grupo" @bind-Value="@PageModel.Nome"></OXTextEdit>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.IsFull.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Descrição" @bind-Value="@PageModel.Descricao"></OXTextEdit>
+            </Field>
+        </Fields>
+    </OXForm>
+</OXModal>
+

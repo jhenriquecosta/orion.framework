@@ -1,0 +1,36 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@inherits XTComponentBase
+
+<EjsNumericTextBox @ref="objEditCurrency"
+                   CssClass="@FieldCssClass"
+                   ShowSpinButton=false
+                   TValue="decimal"
+                   Format="@Format"
+                   Decimals="@Decimals"
+                   Value="Value"
+                   Placeholder="@Caption"
+                   FloatLabelType="@FieldFloatLabel">
+
+    <NumericTextBoxEvents TValue="decimal" ValueChange="OnValueChange"></NumericTextBoxEvents>
+</EjsNumericTextBox>
+
+
+
+@code
+{
+    EjsNumericTextBox<decimal> objEditCurrency;
+    [Parameter] public string Format { get; set; } = "C2";
+    [Parameter] public decimal Value { get; set; }
+    [Parameter] public int Decimals { get; set; } = 2;
+    [Parameter] public EventCallback<decimal> ValueChanged { get; set; }
+    protected async Task OnValueChange(Syncfusion.EJ2.Blazor.Inputs.ChangeEventArgs args)
+    {
+        var value = args.Value;
+        var data = value.To<decimal>();
+        await ValueChanged.InvokeAsync(data);
+        StateHasChanged();
+
+
+    }
+
+}

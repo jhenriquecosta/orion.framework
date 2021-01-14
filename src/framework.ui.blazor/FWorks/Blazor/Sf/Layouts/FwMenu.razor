@@ -1,0 +1,88 @@
+﻿ 
+<SfMenu HamburgerMode="true" ShowItemOnClick="true" Orientation=" Syncfusion.Blazor.Navigations.Orientation.Vertical" Items="@DataSource"></SfMenu>
+@code
+{
+    protected List<MenuItem> DataSource { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        DataSource = await GetMenuAsync();
+
+    }
+    protected async Task<List<MenuItem>> GetMenuAsync()
+    {
+        var lstMenu = new List<MenuItem>();
+
+        var menu = new MenuItem();
+        menu.Text = "Settings";
+        menu.IconCss = "mdi mdi-cog-counterclockwise mdi-18px";
+        if (menu.Items == null) menu.Items = new List<MenuItem>();
+
+        var app_index = new MenuItem();
+        app_index.Text = "Sistemas";
+        app_index.IconCss = "mdi mdi-view-grid-plus-outline mdi-18px";
+        app_index.Url = "settings/sistema/manager";
+        menu.Items.Add(app_index);
+
+
+        var menu_grupo = new MenuItem();
+        menu_grupo.Text = "Modulos";
+        menu_grupo.IconCss = "mdi mdi-folder-multiple mdi-18px";
+        menu_grupo.Url = "settings/modulo/manager";
+        menu.Items.Add(menu_grupo);
+
+
+        //var menu_rotina = new MenuItem();
+        //menu_rotina.Text = "Rotinas";
+        //menu_rotina.IconCss = "mdi mdi-file-settings-variant mdi-18px";
+        //menu_rotina.Url = "settings/rotina/manager";
+        //menu.Items.Add(menu_rotina);
+
+        var menu_index = new MenuItem();
+        menu_index.Text = "Aplicação";
+        menu_index.IconCss = "mdi mdi-file-settings-variant mdi-18px";
+        menu_index.Url = "settings/aplicacao/manager";
+        menu.Items.Add(menu_index);
+
+        var menu_tests = new MenuItem();
+        menu_tests.Text = "Entity Tests";
+        menu_tests.IconCss = "mdi mdi-image-edit mdi-18px";
+        menu_tests.Url = "settings/entitytest/manager";
+        menu.Items.Add(menu_tests);
+
+        lstMenu.Add(menu);
+
+
+        var menuItems = AppHelper.GetCache<List<FWorkMenuItem>>("sys_menu");
+        if (!menuItems.IsNull())
+        {
+            foreach (var item in menuItems)
+            {
+                var mnuItem = new MenuItem();
+                mnuItem.Text = item.Text;
+                mnuItem.IconCss = item.IconCss;
+                mnuItem.Url = item.Url;
+                GetItems(mnuItem, item);
+                lstMenu.Add(mnuItem);
+            }
+        }
+
+
+        return lstMenu;
+    }
+    protected void GetItems(MenuItem menu, FWorkMenuItem oxItem)
+    {
+        foreach (var item in oxItem.SubItems)
+        {
+            var mnuItem = new MenuItem();
+            mnuItem.Text = item.Text;
+            mnuItem.IconCss = item.IconCss;
+            mnuItem.Url = item.Url;
+
+            if (item.SubItems.Count() > 0) GetItems(mnuItem, item);
+            if (menu.Items == null) menu.Items = new List<MenuItem>();
+            menu.Items.Add(mnuItem);
+        }
+    }
+}

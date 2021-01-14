@@ -1,0 +1,56 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@using Syncfusion.EJ2.Blazor.Navigations;
+@using Microsoft.AspNetCore.Components;
+@inject IJSRuntime JsRuntime;
+
+<EjsSidebar ID="right-sidebar" @ref="sidebarRight" EnableGestures="false" Position="@Position" Type="@Type">
+    <ChildContent>
+        <div class="sb-left-pane-header">
+            <div class="sb-setting-header">Preferences</div>
+        </div>
+        <div class="sb-setting-item sb-setting-theme-section">
+            <div class="sb-icons sb-setting-icons sb-icon-Palette"></div>
+            <div class="sb-setting-text">Theme Selection</div>
+
+            <EjsDropDownList ID="mobileTheme" TValue="string" TItem="typeData" PopupWidth="180px" DataSource="@data">
+                <DropDownListEvents ValueChange="ThemeChange" TValue="string"></DropDownListEvents>
+                <DropDownListFieldSettings Text="text" Value="text"></DropDownListFieldSettings>
+            </EjsDropDownList>
+        </div>
+        @*<div class="sb-name">Choose Theme</div>*@
+    </ChildContent>
+</EjsSidebar>
+
+
+@code
+{
+    EjsSidebar sidebarRight;
+
+    public SidebarPosition Position { get; set; } = SidebarPosition.Right;
+
+    public SidebarType Type { get; set; } = SidebarType.Push;
+
+    [Parameter]
+    public string theme { get; set; }
+
+    public class typeData
+    {
+        public string text { get; set; }
+    }
+    private List<typeData> data { get; set; } = new List<typeData> {
+        new typeData { text = "Material" },
+        new typeData { text = "Fabric" },
+        new typeData { text = "Bootstrap" },
+        new typeData { text = "High Contrast" },
+        new typeData { text = "Bootstrap V4" }
+    };
+
+    private void ThemeChange(Syncfusion.EJ2.Blazor.DropDowns.ChangeEventArgs<string> args)
+    {
+        JsRuntime.InvokeAsync<string>("mobileThemeChange", args.Value.ToString());
+    }
+    public void Toggle()
+    {
+        this.sidebarRight.Toggle();
+    }
+}

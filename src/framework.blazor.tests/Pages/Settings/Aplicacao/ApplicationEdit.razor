@@ -1,0 +1,49 @@
+﻿@*@namespace Orion.Prometheus.Blazor.Pages
+@inherits ApplicationEditBase
+<OXModal @ref="ModalEdit" Caption="@Caption">
+    <OXForm ActionModel="@ActionModel" OnResetClick="@(()=> OnHideModal(ModalEdit))" OnDeleteClick="@(()=>OnDeleteModelAsync())" OnSaveClick="@(()=>OnSaveModelAsync())">
+        <Fields>
+            <Field>
+                Id:<b>@PageModel?.Id</b>
+                <b>Informe os dados corretamente</b>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.Is4.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Id Interno" @bind-Value="@PageModel.IdInterno"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is8.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Aplicação" @bind-Value="@PageModel.Nome"></OXTextEdit>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.IsFull.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Descrição" @bind-Value="@PageModel.Descricao"></OXTextEdit>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.Is8.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Icon - Css" @bind-Value="@PageModel.IconCss"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is4.OnDesktop">
+                <SfCheckBox Label="Ativo ?" @bind-Checked="@PageModel.IsEnabled"></SfCheckBox>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                <OXTextEdit Caption="Area" @bind-Value="@PageModel.Area"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                <OXTextEdit Caption="Home" @bind-Value="@PageModel.Home"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                <OXTextEdit Caption="Target" @bind-Value="@PageModel.Target"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                <OXTextEdit Caption="Restrição" @bind-Value="@PageModel.Restricao"></OXTextEdit>
+            </Field>
+        </Fields>
+
+    </OXForm>
+</OXModal>*@
+

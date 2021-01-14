@@ -1,0 +1,75 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@using Newtonsoft.Json
+@using Syncfusion.EJ2.Blazor.Lists
+@using Syncfusion.EJ2.Blazor.Navigations
+@using System.Reflection
+@using Microsoft.AspNetCore.Components
+@inject Microsoft.AspNetCore.Components.NavigationManager UriHelper
+@inject IJSRuntime JsRuntime;
+
+@typeparam TValue
+
+
+@*<div class="sb-dash" @onclick="OnNavigateToDashboard">
+    <div class="sb-home-link mdi mdi-view-dashboard mdi-24px"></div>
+    <div class="sb-dash-text">
+        <span>Dashboard</span>
+    </div>
+
+</div>*@
+<EjsTreeView @ref="ComponentsTree"
+             FullRowSelect="true"
+             ExpandOn="@ExpandOnSettings.Click"
+             TValue="DataMenuItem">
+    <TreeViewEvents TValue="DataMenuItem"></TreeViewEvents>
+    <TreeViewFieldsSettings DataSource="@gridDataSource"
+                            Id="Id"
+                            Text="Caption"
+                            IconCss="IconCls"
+                            NavigateUrl="Url"
+                            ParentID="Ancestral"
+                            HasChildren="HasChild">
+    </TreeViewFieldsSettings>
+</EjsTreeView>
+
+
+
+@code
+ {
+    EjsTreeView<DataMenuItem> ComponentsTree;
+
+    public List<DataMenuItem> gridDataSource { get; set; }
+
+    //void OnNavigateToDashboard()
+    //{
+    //    UriHelper.NavigateTo("/dashboard");
+    //}
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        UriHelper.LocationChanged += new EventHandler<LocationChangedEventArgs>(this.UrlChange);
+        LoadData();
+        base.OnInitialized();
+
+    }
+
+    public void UrlChange(object sender, LocationChangedEventArgs args)
+    {
+        var url = args.Location;
+        this.UpdateNavMenu();
+    }
+    public void UpdateNavMenu()
+    {
+        JsRuntime.InvokeAsync<string>("callResizeEvent");
+    }
+    void LoadData()
+    {
+        //gridDataSource = XTAppSettings.Menu;
+    }
+    protected void Dispose()
+    {
+        UriHelper.LocationChanged -= new EventHandler<LocationChangedEventArgs>(this.UrlChange);
+    }
+
+}

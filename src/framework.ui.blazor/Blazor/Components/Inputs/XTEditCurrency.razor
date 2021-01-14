@@ -1,0 +1,54 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@inherits XTComponentBase
+
+
+<EjsNumericTextBox
+                   OnInput="OnValueChanged"
+                   @onblur="OnBlurFired"
+                   @ref="objEditCurrency"
+                   CssClass="@FieldCssClass"
+                   ShowSpinButton=false
+                   TValue="decimal"
+                   Format="@Format"
+                   Decimals="2"
+                   @bind-Value="Value"
+                   Placeholder="@Caption"
+                   FloatLabelType="@FieldFloatLabel">
+
+    @*<NumericTextBoxEvents TValue="decimal"    ValueChange="OnValueChange"></NumericTextBoxEvents>*@
+</EjsNumericTextBox>
+
+
+
+@code
+{
+    EjsNumericTextBox<decimal> objEditCurrency;
+    private decimal _value;
+    [Parameter] public decimal Value { get; set; }    
+    [Parameter] public string Format { get; set; } = "C2";
+    [Parameter] public EventCallback<decimal> ValueChanged { get; set; }
+    [Parameter] public EventCallback<Microsoft.AspNetCore.Components.Web.FocusEventArgs> OnBlurFired { get; set; }
+   
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+
+    }
+    private Task OnValueChanged(Microsoft.AspNetCore.Components.ChangeEventArgs e)
+    {
+        this.Value = e.Value.To<decimal>();
+        return ValueChanged.InvokeAsync(this.Value);
+    }
+
+    //protected async Task OnValueChange(Syncfusion.EJ2.Blazor.Inputs.ChangeEventArgs args)
+    //{
+    //    var value = args.Value;
+    //    var data = value.To<decimal>();
+    //    await ValueChanged.InvokeAsync(data);
+    //    this.Value = data;
+    //    OnChanged();
+
+
+    //}
+
+}

@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\build\common.props" />
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Description>Helper for identity security</Description>
+    <AssemblyName>Orion.Framework.Security</AssemblyName>
+    <RootNamespace>Orion.Framework</RootNamespace>
+    <AssemblyTitle>Orion.Framework.Security</AssemblyTitle>   
+    <PackageId>Orion.Framework.Security</PackageId>
+    <PackageTags>asp.net;asp.net mvc;boilerplate;application framework;web framework;framework;domain driven design</PackageTags>
+    <PackageReleaseNotes>Help for build applications</PackageReleaseNotes>    
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Event\**" />
+    <Compile Remove="Extensions\**" />
+    <Compile Remove="Rule\**" />
+    <EmbeddedResource Remove="Event\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="Rule\**" />
+    <None Remove="Event\**" />
+    <None Remove="Extensions\**" />
+    <None Remove="Rule\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\SecurityResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SecurityResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\SecurityResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SecurityResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="2.2.0" />    
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\framework\Framework.csproj" />
+  </ItemGroup>
+
+ 
+
+   
+</Project>

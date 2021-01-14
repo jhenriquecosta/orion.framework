@@ -1,0 +1,115 @@
+﻿@inherits LayoutComponentBase
+@namespace Orion.Framework.Ui.Blazor.Components.OXSyncFusion
+@inject Microsoft.AspNetCore.Components.NavigationManager UriHelper;
+@inject IJSRuntime JsRuntime;
+@inject AppState Service;
+
+<OXToasts Timeout="50"></OXToasts>
+
+<CascadingValue Value="@this">
+
+    <SFPanelMain @ref="PanelMain">
+
+        <SFPanelHeader OnToggleClick="@OnToggleClick" OnRightToggleClick="@OnRightToggleClick"></SFPanelHeader>
+
+        <SFPanelContent>
+
+            <SFPanelLeft @ref="PanelLeft"></SFPanelLeft>
+
+            <SFPanelRight Body="@Body" @ref="RightPaneObj"></SFPanelRight>
+
+            <SFPanelMobile @ref="MobileSettingsObj"></SFPanelMobile>
+
+        </SFPanelContent>
+
+    </SFPanelMain>
+
+</CascadingValue>
+
+
+@code
+{
+
+    public SFPanelMain PanelMain { get; set; }
+    public SFPanelLeft PanelLeft { get; set; }
+    public SFPanelRight RightPaneObj { get; set; }
+    public SFPanelMobile MobileSettingsObj { get; set; }
+
+    private void OnToggleClick()
+    {
+        this.PanelLeft.SideBar.Toggle();
+        JsRuntime.InvokeAsync<string>("callResizeEvent");
+    }
+
+    public void OnRightToggleClick()
+    {
+
+        JsRuntime.InvokeAsync<Object>("mobileSideBarVisibility");
+        this.MobileSettingsObj.MobilePreferences.Toggle();
+        JsRuntime.InvokeAsync<Object>("mobileThemePersist");
+    }
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (UriHelper.Uri.IndexOf("material") > 0)
+        {
+            JsRuntime.Sf().EnableRipple(true);
+        }
+        else
+        {
+            JsRuntime.Sf().EnableRipple(false);
+        }
+        if (this.PanelMain.SpinnerObj.TransClass == null || this.PanelMain.SpinnerObj.TransClass == "sb-trans")
+        {
+            this.PanelMain.SpinnerObj.Hide();
+            this.Service.Prop.HideSpinner = false;
+            this.Service.Prop.RestricMouseEvents = false;
+        }
+
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        this.JsRuntime.Sf().LoadLocaleData("wwwroot/locale/pt.json")
+            .LoadCldrData("wwwroot/locale/cldr-data/main/pt/numbers.json",
+            "wwwroot/locale/cldr-data/main/pt/timeZoneNames.json",
+            "wwwroot/locale/cldr-data/main/pt/ca-gregorian.json",
+            "wwwroot/locale/cldr-data/main/pt/currencies.json",
+            "wwwroot/locale/cldr-data/supplemental/numberingSystems.json")
+            .SetCulture("pt").SetCurrencyCode("BRL");
+        Service.Notify += OnNotify;
+
+    }
+    protected override bool ShouldRender()
+    {
+        return true;
+    }
+    public async Task OnNotify(NotifyProperties prop)
+    {
+        await InvokeAsync(() =>
+        {
+            this.PanelMain.SpinnerObj.Hide();
+            this.Service.Prop.HideSpinner = false;
+            this.Service.Prop.RestricMouseEvents = false;
+
+        });
+    }
+
+
+    public void Dispose()
+    {
+        Service.Notify -= OnNotify;
+    }
+
+
+
+
+
+
+
+}

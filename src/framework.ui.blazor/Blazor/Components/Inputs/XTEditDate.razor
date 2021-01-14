@@ -1,0 +1,30 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@inherits XTComponentBase
+@typeparam TValue
+
+<EjsDatePicker Locale="pt-BR"
+               @ref="ejsDate"
+               Placeholder="@Caption"
+               Value="Value"
+               CssClass="@CssClass"
+               Readonly="@ReadOnly"
+               FloatLabelType="FieldFloatLabel">
+    <DatePickerEvents TValue="TValue" ValueChange="OnValueChange"></DatePickerEvents>
+</EjsDatePicker>
+
+
+@code
+{
+    EjsDatePicker<TValue> ejsDate;
+
+     [Parameter] public TValue Value { get; set; }
+    [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
+  
+    protected async Task OnValueChange(ChangedEventArgs<TValue> args)
+    {
+        await ValueChanged.InvokeAsync(args.Value);
+        StateHasChanged();
+
+    }
+
+}

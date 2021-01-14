@@ -1,0 +1,92 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Orion.Framework.App.Domain.Entities.Pessoa, Orion.Framework.App.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="pessoa">
+    <id name="Id" type="System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="id" />
+      <generator class="identity" />
+    </id>
+    <version name="Version" type="System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="version" not-null="true" />
+    </version>
+    <bag inverse="true" name="Grupos" table="Grupo_Pessoa">
+      <key foreign-key="FK_Grupo_Pessoa_Pessoa">
+        <column name="PessoaID" />
+        <column name="PessoaID" />
+      </key>
+      <many-to-many class="Orion.Framework.App.Domain.Entities.Grupo, Orion.Framework.App.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <column name="GrupoID" />
+        <column name="GrupoID" />
+      </many-to-many>
+    </bag>
+    <bag access="backfield" cascade="all-delete-orphan" inverse="true" name="Telefones">
+      <key>
+        <column name="pessoa_id" />
+      </key>
+      <one-to-many class="Orion.Framework.App.Domain.Entities.Telefone, Orion.Framework.App.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" not-found="ignore" />
+    </bag>
+    <property access="backfield" name="Nome" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="nome" />
+    </property>
+    <property access="backfield" name="Endereco" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="endereco" />
+    </property>
+    <property access="backfield" name="Cep" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="cep" />
+    </property>
+    <property access="backfield" name="Email" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="email" />
+    </property>
+    <property access="backfield" name="DataCadastro" type="System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="data_cadastro" not-null="false" sql-type="DATETIME" />
+    </property>
+    <property access="backfield" name="Status" type="Orion.Framework.App.Domain.Entities.Status, Orion.Framework.App.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <column name="status" length="50" not-null="true" />
+    </property>
+    <property access="backfield" name="IsDeleted" type="System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="is_deleted" not-null="true" />
+    </property>
+    <property access="backfield" name="DeletedOn" type="System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="deleted_on" not-null="false" sql-type="DATETIME" />
+    </property>
+    <property access="backfield" name="DeletedUser" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="deleted_user" />
+    </property>
+    <property access="backfield" name="ChangedOn" type="System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="changed_on" not-null="false" sql-type="DATETIME" />
+    </property>
+    <property access="backfield" name="ChangedUser" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="changed_user" />
+    </property>
+    <property access="backfield" name="CreatedOn" type="System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="created_on" not-null="false" sql-type="DATETIME" />
+    </property>
+    <property access="backfield" name="CreatedUser" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="created_user" />
+    </property>
+    <many-to-one access="backfield" cascade="none" class="Orion.Framework.App.Domain.Entities.Departamento, Orion.Framework.App.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" foreign-key="fk_pessoa_departamento" name="Departamento" not-found="ignore">
+      <column name="departamento_id" index="idx_fk_pessoa_departamento" />
+    </many-to-one>
+    <joined-subclass name="Orion.Framework.App.Domain.Entities.PessoaFisica, Orion.Framework.App.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="Pessoafisica">
+      <key foreign-key="fk_pessoafisica_pessoa">
+        <column name="pessoa_id" />
+      </key>
+      <property access="backfield" name="Cpf" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+        <column name="cpf" />
+      </property>
+      <property access="backfield" name="Nacionalidade" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+        <column name="nacionalidade" />
+      </property>
+    </joined-subclass>
+    <joined-subclass name="Orion.Framework.App.Domain.Entities.PessoaJuridica, Orion.Framework.App.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="Pessoajuridica">
+      <key foreign-key="fk_pessoajuridica_pessoa">
+        <column name="pessoa_id" />
+      </key>
+      <property access="backfield" name="Cnpj" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+        <column name="cnpj" />
+      </property>
+      <property access="backfield" name="WebSite" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+        <column name="web_site" />
+      </property>
+    </joined-subclass>
+    <filter name="SoftDeleteFilter" />
+  </class>
+</hibernate-mapping>

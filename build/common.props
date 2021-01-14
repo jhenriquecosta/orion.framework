@@ -1,0 +1,15 @@
+<Project>
+  <Import Project="sign.props" />
+  <Import Project="version.props" />
+  <PropertyGroup>
+    <Authors>ORION Sistemas</Authors>	
+    <Product>ORION Framework</Product>
+    <Copyright>Copyright © 2020</Copyright>
+	
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,78 @@
+﻿@using ColumnType = Syncfusion.Blazor.Grids.ColumnType
+@using System.Reflection
+@using System.Collections.Generic
+@using System.Linq.Expressions
+@using System.Linq
+@namespace Orion.Framework.Ui.Blazor.Components.OXSyncFusion
+@typeparam TModel
+@inherits OXGridBase<TModel>
+
+
+<Row Margin="Margin.Is1.OnAll">
+
+
+    @if (AllowButtons)
+    {
+        <Fields>
+            <Field>
+                <FieldBody>
+                    <SfButton @onclick="@(() => OnAdd.InvokeAsync(null))" IsPrimary="true" IconCss="mdi mdi-database-plus mdi-18px">ADD</SfButton>
+                    <SfButton @onclick="@(() => OnEdit.InvokeAsync(CurrentModel))" IconCss="mdi mdi-database-edit mdi-18px">EDIT</SfButton>
+                    <SfButton @onclick="@(() => OnRemove.InvokeAsync(CurrentModel))" CssClass="e-btn e-warning" IconCss="mdi mdi-database-minus mdi-18px">DELETE</SfButton>
+                    @if (AllowButtonReport)
+                    {
+                      <SfButton @onclick="@(() => OnPrint.InvokeAsync(null))" IconCss="mdi mdi-cloud-print-outline mdi-18px">RELATÓRIO</SfButton>
+                    }
+                </FieldBody>
+            </Field>
+        </Fields>
+    }
+    @if (!@Caption.IsNullOrEmpty())
+    {
+        <Fields>
+            <div class="caption">
+                <b>@Caption</b>
+            </div>
+        </Fields>
+    }
+    <Fields>
+        <SfGrid
+                @ref="SfGridView" 
+                Toolbar=@Tool
+                TValue="TModel"
+                DataSource="@DataSource" AllowSelection="true"
+                AllowFiltering="@AllowFilter"
+                AllowPaging="@AllowPaging">
+
+            <GridEvents TValue="TModel"
+                        CommandClicked="OnCommandClicked"
+                        RowSelected="OnRowSelected">
+            </GridEvents>
+            <GridSelectionSettings Type="SelectionType.Single"></GridSelectionSettings>
+            <GridPageSettings PageCount="5" PageSize="10" PageSizes="@AllowPaging"></GridPageSettings>
+            <GridColumns>
+                @{
+               
+                    foreach (var column in GetColumnsFromModel)
+                    {
+               
+                        <GridColumn 
+                                    Field="@column.Field"
+                                    HeaderText="@column.Caption"                                 
+                                    Format="@column.Format"
+                                    Width="@column.Width"
+                                    Type="@column.Type"
+                                    IsPrimaryKey="@column.IsPrimaryKey"
+                                    AllowEditing="@column.IsEditable"
+                                    AutoFit="@column.IsResizeble"                                   
+                                    DisplayAsCheckBox="@column.IsCheckBox">
+                        </GridColumn>
+                    }
+                }
+                @GridCommand
+            </GridColumns>
+        </SfGrid>
+
+    </Fields>
+
+</Row>

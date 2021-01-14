@@ -1,0 +1,195 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\build\common.props" />
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Description>Orion.Framework</Description>
+    <AssemblyName>Orion.Framework</AssemblyName>
+    <AssemblyTitle>Orion.Framework</AssemblyTitle>  
+    <PackageId>Orion.Framework</PackageId>
+    <PackageTags>asp.net;asp.net mvc;boilerplate;application framework;web framework;framework;domain driven design</PackageTags>
+    <PackageReleaseNotes>Help for build applications</PackageReleaseNotes>
+    <RootNamespace>Orion.Framework</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Applications\Infrastructure\**" />
+    <Compile Remove="Applications\Installation\**" />
+    <Compile Remove="Backup\**" />
+    <Compile Remove="Common\**" />
+    <Compile Remove="DataLayer\Models\**" />
+    <Compile Remove="DataLayer\NH\Sessions\**" />
+    <Compile Remove="DataLayer\UnitOfWorks\Backup\**" />
+    <Compile Remove="Domains\Auditing\Backup\**" />
+    <Compile Remove="Domains\Base\Aggregate\**" />
+    <Compile Remove="Domains\Base\Entity\**" />
+    <Compile Remove="Domains\Core\**" />
+    <Compile Remove="Domains\Mappings\**" />
+    <Compile Remove="Events\Backup\**" />
+    <Compile Remove="Helpers\Reflections\**" />
+    <Compile Remove="MultiTenancy\**" />
+    <Compile Remove="Objects\AttachedProperties\**" />
+    <Compile Remove="Objects\MetaProperties\**" />
+    <Compile Remove="Settings\AppSettingsConfiguration\**" />
+    <Compile Remove="Settings\Bootstrapper\**" />
+    <Compile Remove="Settings\FileSettings\**" />
+    <Compile Remove="Ui\Attributes\**" />
+    <EmbeddedResource Remove="Applications\Infrastructure\**" />
+    <EmbeddedResource Remove="Applications\Installation\**" />
+    <EmbeddedResource Remove="Backup\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <EmbeddedResource Remove="DataLayer\Models\**" />
+    <EmbeddedResource Remove="DataLayer\NH\Sessions\**" />
+    <EmbeddedResource Remove="DataLayer\UnitOfWorks\Backup\**" />
+    <EmbeddedResource Remove="Domains\Auditing\Backup\**" />
+    <EmbeddedResource Remove="Domains\Base\Aggregate\**" />
+    <EmbeddedResource Remove="Domains\Base\Entity\**" />
+    <EmbeddedResource Remove="Domains\Core\**" />
+    <EmbeddedResource Remove="Domains\Mappings\**" />
+    <EmbeddedResource Remove="Events\Backup\**" />
+    <EmbeddedResource Remove="Helpers\Reflections\**" />
+    <EmbeddedResource Remove="MultiTenancy\**" />
+    <EmbeddedResource Remove="Objects\AttachedProperties\**" />
+    <EmbeddedResource Remove="Objects\MetaProperties\**" />
+    <EmbeddedResource Remove="Settings\AppSettingsConfiguration\**" />
+    <EmbeddedResource Remove="Settings\Bootstrapper\**" />
+    <EmbeddedResource Remove="Settings\FileSettings\**" />
+    <EmbeddedResource Remove="Ui\Attributes\**" />
+    <None Remove="Applications\Infrastructure\**" />
+    <None Remove="Applications\Installation\**" />
+    <None Remove="Backup\**" />
+    <None Remove="Common\**" />
+    <None Remove="DataLayer\Models\**" />
+    <None Remove="DataLayer\NH\Sessions\**" />
+    <None Remove="DataLayer\UnitOfWorks\Backup\**" />
+    <None Remove="Domains\Auditing\Backup\**" />
+    <None Remove="Domains\Base\Aggregate\**" />
+    <None Remove="Domains\Base\Entity\**" />
+    <None Remove="Domains\Core\**" />
+    <None Remove="Domains\Mappings\**" />
+    <None Remove="Events\Backup\**" />
+    <None Remove="Helpers\Reflections\**" />
+    <None Remove="MultiTenancy\**" />
+    <None Remove="Objects\AttachedProperties\**" />
+    <None Remove="Objects\MetaProperties\**" />
+    <None Remove="Settings\AppSettingsConfiguration\**" />
+    <None Remove="Settings\Bootstrapper\**" />
+    <None Remove="Settings\FileSettings\**" />
+    <None Remove="Ui\Attributes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="DataLayer\SessionContext\Class1.cs" />
+    <Compile Remove="DataLayer\SessionContext\SessionContextInfo.cs" />
+    <Compile Remove="Domains\Auditing\CreationAuditedInitializer.cs" />
+    <Compile Remove="Domains\Auditing\ICreationAudited.cs" />
+    <Compile Remove="Domains\Auditing\ICreationTime.cs" />
+    <Compile Remove="Domains\Auditing\ICreator.cs" />
+    <Compile Remove="Domains\Auditing\ICreatorAudited.cs" />
+    <Compile Remove="Domains\Auditing\IModificationAudited.cs" />
+    <Compile Remove="Domains\Auditing\IModificationTime.cs" />
+    <Compile Remove="Domains\Auditing\IModifier.cs" />
+    <Compile Remove="Domains\Auditing\IModifierAudited.cs" />
+    <Compile Remove="Domains\Auditing\ModificationAuditedInitializer.cs" />
+    <Compile Remove="Domains\Domains.ValueObjects\EditValue.cs" />
+    <Compile Remove="Extensions\Extensions.Dictionary.cs" />
+    <Compile Remove="Maps\Mapper.cs" />
+    <Compile Remove="Security\Domain\Dtos\Account\Class1.cs" />
+    <Compile Remove="Security\Principals\DefaultPrincipalProvider.cs" />
+    <Compile Remove="Security\Principals\IPrincipalProvider.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Extensions\Objects\Extensions.Dictionary.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+
+    
+    <!-- ASPNETCORE-BEGIN -->
+   
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+  
+    
+    <!-- ASPNETCORE-END -->
+
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.20" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+   
+    <PackageReference Include="IdentityModel" Version="4.1.1" />
+  
+
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.1" />
+    
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
+    <PackageReference Include="AspectCore.Extensions.AspectScope" Version="2.0.0" />
+    <PackageReference Include="AspectCore.Extensions.Autofac" Version="2.0.0" />
+    <PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="2.0.0" />
+   
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />   
+
+   
+
+    <PackageReference Include="MailKit" Version="2.5.1" />
+
+   
+   
+    
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Properties\LibraryResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LibraryResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\R.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>R.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\LibraryResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LibraryResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\R.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>R.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Applications\Web\" />
+    <Folder Include="DataLayer\NH\SessionContexts\" />
+  </ItemGroup>
+ 
+</Project>

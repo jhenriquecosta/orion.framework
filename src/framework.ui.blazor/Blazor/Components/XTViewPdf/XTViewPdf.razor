@@ -1,0 +1,17 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@inherits XTComponentBase
+
+
+<Row>
+    <Column>
+        <EjsPdfViewerServer DocumentPath="@DocumentPath" Height="640px" Width="100%"></EjsPdfViewerServer>
+    </Column>
+</Row>
+
+@code
+{
+
+    [Parameter] public string DocumentPath { get; set; } 
+    [Parameter] public Uri GetUri { get; set; }
+
+}

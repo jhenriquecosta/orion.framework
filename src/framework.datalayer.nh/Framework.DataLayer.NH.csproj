@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\build\common.props" />
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Description>Facilities for NHIBERNATE</Description>
+    <AssemblyName>Orion.Framework.DataLayer.NH</AssemblyName>
+    <RootNamespace>Orion.Framework.DataLayer</RootNamespace>
+    <AssemblyTitle>Orion.Framework.DataLayer.NH</AssemblyTitle>
+    <PackageId>Orion.Framework.DataLayer.NH</PackageId>
+    <PackageTags>asp.net;asp.net mvc;boilerplate;application framework;web framework;framework;domain driven design</PackageTags>
+    <PackageReleaseNotes>Helpers For NHIBERNATE Development Applications</PackageReleaseNotes>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Backup\**" />
+    <Compile Remove="Dapper\**" />
+    <Compile Remove="Manager\**" />
+    <Compile Remove="NH\Contracts\**" />
+    <Compile Remove="NH\Core\Configuration\Fluent\BuildFluentConfiguration\Backup\**" />
+    <Compile Remove="NH\Core\Configuration\SessionProvider\**" />
+    <Compile Remove="NH\Core\Events\Core\**" />
+    <Compile Remove="NH\Core\Events\Services\**" />
+    <Compile Remove="NH\Extensions\**" />
+    <Compile Remove="NH\Helpers\**" />
+    <Compile Remove="NH\PersistentSupport\Backup\**" />
+    <Compile Remove="NH\UnitOfWorks\RetroCompatibilidade\**" />
+    <EmbeddedResource Remove="Backup\**" />
+    <EmbeddedResource Remove="Dapper\**" />
+    <EmbeddedResource Remove="Manager\**" />
+    <EmbeddedResource Remove="NH\Contracts\**" />
+    <EmbeddedResource Remove="NH\Core\Configuration\Fluent\BuildFluentConfiguration\Backup\**" />
+    <EmbeddedResource Remove="NH\Core\Configuration\SessionProvider\**" />
+    <EmbeddedResource Remove="NH\Core\Events\Core\**" />
+    <EmbeddedResource Remove="NH\Core\Events\Services\**" />
+    <EmbeddedResource Remove="NH\Extensions\**" />
+    <EmbeddedResource Remove="NH\Helpers\**" />
+    <EmbeddedResource Remove="NH\PersistentSupport\Backup\**" />
+    <EmbeddedResource Remove="NH\UnitOfWorks\RetroCompatibilidade\**" />
+    <None Remove="Backup\**" />
+    <None Remove="Dapper\**" />
+    <None Remove="Manager\**" />
+    <None Remove="NH\Contracts\**" />
+    <None Remove="NH\Core\Configuration\Fluent\BuildFluentConfiguration\Backup\**" />
+    <None Remove="NH\Core\Configuration\SessionProvider\**" />
+    <None Remove="NH\Core\Events\Core\**" />
+    <None Remove="NH\Core\Events\Services\**" />
+    <None Remove="NH\Extensions\**" />
+    <None Remove="NH\Helpers\**" />
+    <None Remove="NH\PersistentSupport\Backup\**" />
+    <None Remove="NH\UnitOfWorks\RetroCompatibilidade\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="NH\Core\Configuration\Fluent\Automap\Conventions\ColumnName\ColumnNameComponentConvention.cs" />
+    <Compile Remove="NH\Core\Configuration\Fluent\Automap\Conventions\ColumnName\ColumnNamePropertyConvention.cs" />
+    <Compile Remove="NH\Dependency\ApplicationDataContext.cs" />
+    <Compile Remove="NH\Core\Events\Interceptors\StaleInterceptor.cs" />
+    <Compile Remove="NH\Core\Events\Listeners\AuditLogEventListener.cs" />
+    <Compile Remove="NH\Core\Events\Listeners\DeleteEventListener.cs" />
+    <Compile Remove="NH\Core\Events\Listeners\EventListenerHelper.cs" />
+    <Compile Remove="NH\Core\Events\Listeners\MergeEventListener.cs" />
+    <Compile Remove="NH\Core\Events\Listeners\SaveOrUpdateEventListener.cs" />
+    <Compile Remove="NH\Core\Logs\NhLog.cs" />
+    <Compile Remove="NH\Core\Logs\NhLogProvider.cs" />
+    <Compile Remove="NH\Core\Logs\NullLogger.cs" />
+    <Compile Remove="NH\Core\Events\Class1.cs" />
+    <Compile Remove="NH\Core\Utilities\NhibernateWorkingMemoryGetStrategy.cs" />
+    <Compile Remove="NH\UnitOfWorks\Class1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="2.1.2" />
+    <PackageReference Include="NHibernate" Version="5.2.7" />
+    <PackageReference Include="NHibernate.Caches.CoreDistributedCache" Version="5.6.0" />
+    <PackageReference Include="NHibernate.Caches.StackExchangeRedis" Version="5.6.0" />
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="DapperExtensions.DotnetCore" Version="1.0.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\framework.caches\Framework.Caches.csproj" />
+    <ProjectReference Include="..\framework.logs\Framework.Logs.csproj" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2000/1/1" /></VisualStudio></ProjectExtensions>
+
+</Project>

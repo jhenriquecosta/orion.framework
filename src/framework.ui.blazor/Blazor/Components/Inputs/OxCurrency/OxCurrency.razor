@@ -1,0 +1,19 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@inherits OxNumberBase<decimal>
+
+<EjsNumericTextBox @bind-Value="@Value"
+                   @ref="objNumberEdit"
+                   TValue="decimal"
+                   Format="@Format"
+                   Decimals="@Decimals"
+                   ShowSpinButton="@ShowSpinButton"
+                   OnChange="OnValueChanged"
+                   OnBlur="OnBlurFired"
+                 
+                   ShowClearButton="@ShowClearButton"
+                   Readonly="@(!AllowEdit)"
+                   CssClass="@CssClass"
+                   Placeholder="@Caption"
+                   FloatLabelType="@FloatLabel">
+
+</EjsNumericTextBox>

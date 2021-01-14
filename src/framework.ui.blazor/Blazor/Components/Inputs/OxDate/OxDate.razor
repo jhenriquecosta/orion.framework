@@ -1,0 +1,15 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@typeparam TValue
+@inherits OxDateBase<TValue>
+
+    <EjsDatePicker @bind-Value="@Value"
+                   @ref="objDateEdit"
+                   OnBlur="OnBlurFired"
+                   Locale="@Locale"
+                   ShowClearButton="@ShowClearButton"
+                   Readonly="@(!AllowEdit)"
+                   CssClass="@CssClass"
+                   Placeholder="@Caption"
+                   FloatLabelType="@FloatLabel">
+        <DatePickerEvents TValue="TValue" ValueChange="OnValueChanged"></DatePickerEvents>
+    </EjsDatePicker>

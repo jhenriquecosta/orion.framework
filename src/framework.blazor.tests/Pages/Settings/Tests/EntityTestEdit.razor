@@ -1,0 +1,79 @@
+﻿@page  "/settings/entitytest/manager"
+@using Orion.Framework.Ui.Blazor.Icons
+@inherits PageForm
+@inject IconManager IconManager
+
+    <FwContainer>
+        <FwPanel Title="Tests" SubTitle="SFSKJFHKSDFHKIS">
+
+            <Fields>
+                <Field ColumnSize="ColumnSize.IsHalf">
+                    <FwComboBox TItem="FWorkStyleButton" Caption="Style" Value="@PageModelDto.StyleButton" ValueChanged="@((value)=>PageModelDto.StyleButton = value)"></FwComboBox>
+                </Field>
+                <Field ColumnSize="ColumnSize.IsHalf">
+                    <FwText Caption="Nome" @bind-Value="@PageModelDto.Nome"></FwText>
+                </Field>
+                @*<Field ColumnSize="ColumnSize.Is2">
+                <FwText Caption="Descricao" @bind-Value="@PageModelDto.Descricao"></FwText>
+            </Field>*@
+            </Fields>
+
+            <FwButton Caption="Gerar Icone" OnClick="OnClick"></FwButton>
+             
+
+        </FwPanel>
+
+    </FwContainer>
+        <FwModal @ref="ModalEdit" Caption="@Caption">
+            <FwForm ActionModel="@ActionModel" OnResetClick="@(()=>OnQuestionAsync())">
+                <br />
+                <Fields>
+                    <Field>
+                        Id:<b>@PageModelDto?.Id</b>
+                        <b>Informe os dados corretamente</b>
+                    </Field>
+                </Fields>
+
+                <Fields>
+                    
+                    <Field ColumnSize="ColumnSize.IsFull.OnDesktop.IsHalf.OnMobile">
+                        <FwText Caption="Nome" @bind-Value="@PageModelDto.Nome"></FwText>
+                    </Field>
+                </Fields>
+                <Fields>
+                    <Field ColumnSize="ColumnSize.IsFull.OnDesktop.IsHalf.OnMobile">
+                        <FwText Caption="Descrição" @bind-Value="@PageModelDto.Descricao"></FwText>
+                    </Field>
+                </Fields>
+               
+            </FwForm>
+        </FwModal>
+
+
+@code
+{
+    protected FwModal ModalEdit { get; set; }
+    protected string Caption { get; set; }
+    protected FWorkActionModel ActionModel { get; set; }
+    protected PageModel PageModelDto { get; set; } = new PageModel();
+    protected List<DataItemCombo> Icons { get; set; }
+    protected void OnClick()
+    {
+
+        IconManager.CreateFileEnumFor();
+        Toast.ShowInfo("Arquivo gerado");
+    }
+    protected async Task OnQuestionAsync()
+    {
+        var result = await QuestionAsync("Qual a Mensagem ?");
+
+        if (result) ModalEdit.Hide();
+    }
+    public class PageModel
+    {
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Descricao { get; set; }
+        public FWorkStyleButton StyleButton { get; set; }
+    }
+}

@@ -1,0 +1,78 @@
+﻿@namespace Framework.Web.Blazor.Components.Apex
+
+@inherits XTLayoutComponentBase
+
+
+<div data-active-color="white" data-background-color="purple-bliss" data-image="apex/theme4/app-assets/img/sidebar-bg/01.jpg" class="app-sidebar">
+    @ChildContent
+</div>
+
+@code
+{
+
+
+
+    //[Parameter] protected RenderFragment ChildContent { get; set; }
+    //[Parameter] protected string Css { get; set; } = string.Empty;
+
+
+    //bool isLoading = false;
+
+    //MenuBuilder menuBuilder = new MenuBuilder();
+
+    //protected override async Task OnInitAsync()
+    //{
+    //    await base.OnInitAsync();
+
+    //    Console.WriteLine("Iniciando menu");
+    //    Console.WriteLine(isLoading.ToString());
+
+    //    var menu = new MenuItem();
+    //    menu.Position = 1;
+    //    menu.IsSubMenu = true;
+    //    menu.Caption = "DASHBOARD";
+    //    menu.IsVisible = true;
+    //    menu.IsEnabled = true;
+    //    menu.Icon = "ft-home";
+
+    //    var menuItem = new MenuItem();
+    //    menuItem.Position = 2;
+    //    menuItem.IsSubMenu = false;
+    //    menuItem.Caption = "PAGE TESTS";
+    //    menuItem.IsVisible = true;
+    //    menuItem.IsEnabled = true;
+    //    menuItem.Icon = "ft-file-text";
+    //    menuItem.Link = "pagegrid";
+
+
+    //    menu.MenuItems.AddItem(menuItem);
+    //    menuBuilder.AddItem(menu);
+    //    Console.WriteLine("erro");
+    //    try
+    //    {
+    //        menuItem.MenuItems.Build(x => x.Position);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine($"erro {ex.Message}");
+    //    }
+
+    //}
+
+    //protected async override Task OnAfterRenderAsync()
+    //{
+
+    //    if (!isLoading)
+    //    {
+    //        base.OnAfterRender();
+
+
+
+    //        await JsRuntime.InvokeAsync<object>("loadsidebar");
+    //        Console.WriteLine(this.ShouldRender().ToString());
+    //        isLoading = true;
+    //    }
+
+    //}
+
+}

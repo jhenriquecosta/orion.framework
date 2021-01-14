@@ -1,0 +1,22 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components.OXSyncFusion
+
+@inherits OXToastBase
+
+    <SfToast @ref="SelfComponent"
+              TimeOut="@Timeout"
+              Buttons="@ToastButtons"
+              Title="@ToastSettings.Heading"
+              Icon="@ToastSettings.IconClass"
+              CssClass="@ToastSettings.CssClass"
+              Content="@ToastSettings.Message"
+              ShowCloseButton="@ShowCloseBtn"
+              ShowProgressBar="@ShowProgressBtn"
+              NewestOnTop="@ShowNewestOnTop">
+
+        <ToastPosition X="Right" Y="Bottom"></ToastPosition>
+        <ToastEvents Created="OnCreated" ></ToastEvents>
+        <ToastAnimationSettings>
+            <ToastAnimationSettingsShow Effect="@ShowEffect" Easing="@ShowEasing" Duration="@ShowDuration"></ToastAnimationSettingsShow>
+            <ToastAnimationSettingsHide Effect="@HideEffect" Easing="@HideEasing" Duration="@HideDuration"></ToastAnimationSettingsHide>
+        </ToastAnimationSettings>
+    </SfToast>

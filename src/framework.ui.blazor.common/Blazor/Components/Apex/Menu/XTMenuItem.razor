@@ -1,0 +1,79 @@
+﻿@namespace Framework.Web.Blazor.Components.Apex
+
+
+@if (ChildContent != null)
+{
+    <li class=" nav-item" disabled="@(!IsEnabled)">
+        <a href="@Url">
+            <i class="@Icon"></i>
+            <span data-i18n="" class="menu-item">@Caption</span>
+        </a>
+        @ChildContent
+    </li>
+}
+else
+{
+
+    if (IsEnabled)
+    {
+        if (string.IsNullOrEmpty(Caption))
+        {
+            var x = @MenuItem.Caption;
+            <li class=" nav-item">
+                <a href="@MenuItem.Link">
+                    <i class="@MenuItem.Icon"></i>
+                    <span data-i18n="" class="menu-item">@MenuItem.Caption</span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class=" nav-item">
+                <a href="@Url">
+                    <i class="@Icon"></i>
+                    <span data-i18n="" class="menu-item">@Caption</span>
+                </a>
+            </li>
+        }
+    }
+    else
+    {
+
+
+        <li class=" nav-item" disabled>
+            <a href="@MenuItem.Link">
+                <i class="@MenuItem.Icon"></i>
+                <span data-i18n="" class="menu-item">@MenuItem.Caption</span>
+            </a>
+        </li>
+    }
+}
+
+
+
+
+@code
+{
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public string Caption { get; set; }
+    [Parameter] public string Url { get; set; }
+    [Parameter] public string Icon { get; set; }
+    [Parameter] public bool IsEnabled { get; set; } = true;
+    [Parameter] public bool IsVisible { get; set; } = true;
+    [Parameter] public string Css { get; set; } = string.Empty;
+    [Parameter] public MenuElement MenuItem { get; set; }
+
+    protected string CssString
+    {
+        get
+        {
+            var cssString = string.Empty;
+
+            cssString += $"{Css}";
+            cssString += !IsEnabled ? " disabled" : "";
+            cssString += !IsVisible ? " hidden" : "";
+
+            return cssString.Trim();
+        }
+    }
+}

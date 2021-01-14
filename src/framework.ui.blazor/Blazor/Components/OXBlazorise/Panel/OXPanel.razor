@@ -1,0 +1,38 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components.OXBlazorise
+@inherits OXPanelBase
+    <Indicator IndicatorContext="on-panel-context">
+        <ErrorContent Context="t">
+            <p>Error: @t.Exception.Message</p>
+            <button class="btn btn-primary" @onclick="@t.DismissException">Dismiss</button>
+        </ErrorContent>
+        <ChildContent>
+            <Card ColumnSize="@SizeColumn" Margin="@SizeMargin">
+                <CardHeader>
+                    @if (!Title.IsEmpty())
+                    {
+                        <CardTitle>@Title</CardTitle>
+                    }
+                    @if (!SubTitle.IsEmpty())
+                    {
+                        <CardSubtitle>@SubTitle</CardSubtitle>
+                    }
+                </CardHeader>
+                @if (Top != null)
+                {
+                    <CardBody>
+                        @Top
+                    </CardBody>
+                }
+                <CardBody>
+                    @ChildContent
+                </CardBody>
+
+                @if (Bottom != null)
+                {
+                    <CardFooter>
+                        @Bottom
+                    </CardFooter>
+                }
+            </Card>
+        </ChildContent>
+    </Indicator>

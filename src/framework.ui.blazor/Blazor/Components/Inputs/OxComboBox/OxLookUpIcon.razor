@@ -1,0 +1,21 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@inherits OxLookUpIconBase
+
+
+<EjsComboBox
+            
+           
+             @ref="ejsComboImage"
+             Value="@InternalValue"
+             Placeholder="@Caption"
+             DataSource="@DataSource"
+             Readonly="@(!AllowEdit)"
+             AllowFiltering="@AllowFiltering"
+             IgnoreAccent="@IgnoreAccent"
+             CssClass="@CssClass"
+             FloatLabelType="@FloatLabel">
+
+    <ComboBoxEvents TValue="string" DataBound="OnDataBound" Destroyed="OnDestroyed" Created="OnCreated" ValueChange="OnValueChanged"></ComboBoxEvents>
+    <ComboBoxFieldSettings Text="@FieldText" IconCss="@FieldValue" Value="@FieldValue"></ComboBoxFieldSettings>
+</EjsComboBox>
+

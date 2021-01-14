@@ -1,0 +1,23 @@
+﻿@*@namespace Orion.Prometheus.Blazor.Pages
+@page "/settings/aplicacao/manager"
+@inherits OXPageModel<Aplicacao>
+
+       <OXPanel Title="APLICAÇÃO" SubTitle="Cria/Edita/Exclui registros">
+            <OXGrid @ref="GridView"
+                    TModel="Aplicacao"
+                    DataSource="GetAll"
+                    AllowButtons="true"
+                    AllowPrint="true"
+                    OnAdd="@((value) => ComponentEdit.ShowDialog(null,OxActionModel.New))"
+                    OnEdit="@((value) => ComponentEdit.ShowDialog(value,OxActionModel.Edit))"
+                    OnRemove="@((value) => ComponentEdit.ShowDialog(value,OxActionModel.Delete))">
+            </OXGrid>
+        </OXPanel>
+
+<ApplicationEdit Caption="APLICACÃO" GridView="GridView" @ref="ComponentEdit"></ApplicationEdit>
+@code
+{
+    protected ApplicationEdit ComponentEdit { get; set; }
+   
+
+}*@

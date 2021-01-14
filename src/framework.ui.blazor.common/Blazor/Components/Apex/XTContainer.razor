@@ -1,0 +1,9 @@
+﻿@namespace Framework.Web.Blazor.Components.Apex
+
+<div class="wrapper">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+}

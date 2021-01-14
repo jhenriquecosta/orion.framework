@@ -1,0 +1,14 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components.OXSyncFusion
+@inherits OXTextEditBase
+<SfTextBox 
+          OnChange="OnValueChanged"
+          OnBlur="OnBlurFired"
+          Locale="@Locale"
+          ShowClearButton="@ShowClearButton"
+          @ref="objEditText"
+          Readonly="@(!AllowEdit)"        
+          CssClass="@CssClass"
+          @bind-Value="@Value"
+          Placeholder="@Caption"
+          FloatLabelType="@FloatLabel">
+</SfTextBox>

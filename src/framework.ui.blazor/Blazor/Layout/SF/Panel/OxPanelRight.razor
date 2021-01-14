@@ -1,0 +1,9 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+<div class='sb-right-pane e-view' id='right-pane'>
+    @ChildContent
+</div>
+
+@code
+{
+    [Parameter] public RenderFragment ChildContent { get; set; }
+}

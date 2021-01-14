@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <Import Project="..\..\build\common.props" />
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>Orion.Framework.Ui</RootNamespace>
+    <AssemblyName>Orion.Framework.Ui.Blazor.Common</AssemblyName>   
+    <AssemblyTitle>Orion.Framework.Ui.Blazor.Common</AssemblyTitle>
+    <PackageId>Orion.Framework.Ui.Blazor.Common</PackageId>
+    <PackageTags>asp.net;asp.net mvc;boilerplate;application framework;web framework;framework;domain driven design</PackageTags>    
+    <PackageReleaseNotes>Helpers For Blazor Web Applications</PackageReleaseNotes>
+    <Description>Facilities for Blazor Application</Description>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  
+
+  <ItemGroup>
+    <Compile Remove="Blazor\Components\Apex\**" />
+    <Compile Remove="Blazor\JsInterop\Extensions\**" />
+    <Compile Remove="Blazor\JsInterop\OfRunner\**" />
+    <Content Remove="Blazor\Components\Apex\**" />
+    <Content Remove="Blazor\JsInterop\Extensions\**" />
+    <Content Remove="Blazor\JsInterop\OfRunner\**" />
+    <EmbeddedResource Remove="Blazor\Components\Apex\**" />
+    <EmbeddedResource Remove="Blazor\JsInterop\Extensions\**" />
+    <EmbeddedResource Remove="Blazor\JsInterop\OfRunner\**" />
+    <None Remove="Blazor\Components\Apex\**" />
+    <None Remove="Blazor\JsInterop\Extensions\**" />
+    <None Remove="Blazor\JsInterop\OfRunner\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Blazor\Icons\XTIcons.cs" />
+    <Compile Remove="Blazor\Enums\Class1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\framework.pdf.reports\Framework.Pdf.Reports.csproj" />
+    <ProjectReference Include="..\framework.web.mvc\Framework.Web.Mvc.csproj" />
+  </ItemGroup>
+ 
+
+  
+
+</Project>

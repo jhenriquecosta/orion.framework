@@ -1,0 +1,22 @@
+﻿@namespace Orion.Prometheus.Blazor.Pages
+@typeparam TModel
+
+<OXGrid @ref="gridView"
+    DataSource="GetDataSource"
+    TModel="TModel"
+    AllowButtons="true"
+    AllowPrint="true"
+    OnAdd="@((value) => OnShowModal.InvokeAsync(null))"
+    OnEdit="@((value) => sistemaEdit.ShowDialog(value, OxActionModel.Edit))"
+    OnRemove="@((value) => sistemaEdit.ShowDialog(value, OxActionModel.Delete))">
+</OXGrid>
+
+@code
+{
+    protected OXGrid<TModel> gridView;
+    [Parameter] public string Title { get; set; }
+    [Parameter] public string SubTitle { get; set; }
+    [Parameter] public IEnumerable<TModel> GetDataSource { get; set; }
+    [Parameter] public EventCallback<TModel> OnShowModal { get; set; }
+
+}

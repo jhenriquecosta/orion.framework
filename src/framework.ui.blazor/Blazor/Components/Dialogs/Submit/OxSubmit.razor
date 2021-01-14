@@ -1,0 +1,19 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+@inherits OxSubmitBase
+<form @onsubmit="@OnFormSubmit" @onsubmit:preventDefault="true">
+    @ChildContent
+    <div class="e-footer-content">
+        <div class="button-container">
+            @Buttons
+            <button type="button" class="e-btn e-normal" @onclick="OnResetButtonClick">@CloseButtonText</button>
+            @if (ActionModel == OxActionModel.Delete)
+            {
+                <button type="button" class="e-btn e-warning" @onclick="@(() => OnDeleteClick.InvokeAsync(null))">@DeleteButtonText</button>
+            }
+            else
+            {
+                <button type="button" class="e-btn  e-normal e-primary" @onclick="@(() => OnSaveClick.InvokeAsync(null))">@SaveButtonText</button>
+            }
+        </div>
+    </div>
+</form>

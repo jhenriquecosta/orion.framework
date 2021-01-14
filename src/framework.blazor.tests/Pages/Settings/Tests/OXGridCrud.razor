@@ -1,0 +1,19 @@
+﻿@typeparam TModel;
+@namespace Orion.Prometheus.Blazor.Pages
+        <OXGrid @ref="gridCrud"
+                DataSource="DataSource"
+                TModel="TModel"
+                AllowButtons="true"
+                AllowPrint="true"
+              >
+        </OXGrid>
+
+@code
+{
+    protected OXGrid<TModel> gridCrud { get; set; }
+    [Parameter] public IEnumerable<TModel> DataSource { get; set; }
+   
+
+
+
+}

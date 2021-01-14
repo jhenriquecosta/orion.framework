@@ -1,0 +1,14 @@
+﻿@using Orion.Framework.Ui.Blazor.Pages
+@namespace Orion.Framework.Ui.Blazor.Components
+@inherits OxContainerBase 
+<div class="control-section">
+    <Indicator IndicatorContext="on-container">
+        <ErrorContent Context="t">
+            <p>Error: @t.Exception.Message</p>
+            <button class="btn btn-primary" @onclick="@t.DismissException">Dismiss</button>
+        </ErrorContent>
+        <ChildContent>
+            @ChildContent
+        </ChildContent>
+    </Indicator>
+</div>

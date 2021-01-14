@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\build\common.props" />
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Description>Facilities for Web Application</Description>
+    <AssemblyName>Orion.Framework.Web.Applications</AssemblyName>
+    <RootNamespace>Orion.Framework.Web</RootNamespace>
+    <AssemblyTitle>Orion.Framework.Web.Applications</AssemblyTitle>
+    <PackageId>Orion.Framework.Web.Applications</PackageId>
+    <PackageTags>asp.net;asp.net mvc;boilerplate;application framework;web framework;framework;domain driven design</PackageTags>
+    <PackageReleaseNotes>Helpers For Web Applications</PackageReleaseNotes>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  
+  
+  <ItemGroup>
+    <Compile Remove="Dependency\**" />
+    <Compile Remove="Services\Crud\**" />
+    <Compile Remove="Web\**" />
+    <EmbeddedResource Remove="Dependency\**" />
+    <EmbeddedResource Remove="Services\Crud\**" />
+    <EmbeddedResource Remove="Web\**" />
+    <None Remove="Dependency\**" />
+    <None Remove="Services\Crud\**" />
+    <None Remove="Web\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\framework.datalayer.nh\Framework.DataLayer.NH.csproj" />
+  </ItemGroup>
+
+
+</Project>

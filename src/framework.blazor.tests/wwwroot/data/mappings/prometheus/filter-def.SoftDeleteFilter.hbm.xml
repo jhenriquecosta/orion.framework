@@ -1,0 +1,5 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <filter-def name="SoftDeleteFilter" condition="IsDeleted != :deleted">
+    <filter-param name="deleted" type="Boolean" />
+  </filter-def>
+</hibernate-mapping>

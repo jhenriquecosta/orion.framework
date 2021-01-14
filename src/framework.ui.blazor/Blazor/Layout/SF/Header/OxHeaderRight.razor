@@ -1,0 +1,10 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components
+
+<div class='sb-header-right sb-right sb-table'>
+    @ChildContent
+</div>
+
+@code
+{
+    [Parameter] public RenderFragment ChildContent { get; set; }
+}

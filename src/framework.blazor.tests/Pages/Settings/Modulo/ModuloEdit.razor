@@ -1,0 +1,52 @@
+﻿@namespace Orion.Prometheus.Blazor.Pages
+@inherits ModuloEditBase
+<OXModal @ref="ModalEdit" Caption="@Caption">
+    <OXForm ActionModel="@ActionModel" OnResetClick="@(()=> OnHideModal(ModalEdit))" OnDeleteClick="@(()=>OnDeleteAsync())" OnSaveClick="@(()=>OnSaveOrUpdateAsync())">
+        <br />
+        <Fields>
+            <Field ColumnSize="ColumnSize.IsHalf.OnDesktop.IsHalf.OnMobile">
+                Id:<b>@PageModel?.Id</b>
+                <b>Informe os dados corretamente</b>
+            </Field>
+            <Field ColumnSize="ColumnSize.IsHalf.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Sistema" Value="@PageModel?.Sistema?.Nome" AllowEdit="false"></OXTextEdit>
+            </Field>
+        </Fields>
+        <Fields>
+
+            <Field ColumnSize="ColumnSize.IsThird.OnDesktop">
+                <OXTextEdit Caption="Ancestral" Value="@Ancestral?.Path" AllowEdit="false"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.IsThird.OnDesktop">
+                <OXTextEdit Caption="Unidade Superior" Value="@Ancestral?.Nome" AllowEdit="false"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.IsThird.OnDesktop">
+                <OXTextEdit Caption="Path" Value="@PageModel.Path" AllowEdit="false"></OXTextEdit>
+            </Field>
+
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.Is4.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Módulo" @bind-Value="@PageModel.IdInterno"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is8.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Descrição" @bind-Value="@PageModel.Nome"></OXTextEdit>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.IsFull.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Descrição" @bind-Value="@PageModel.Descricao"></OXTextEdit>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.Is8.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Icon - Css" @bind-Value="@PageModel.IconCss"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is4.OnDesktop">
+                <SfCheckBox Label="Ativo ?" @bind-Checked="@PageModel.IsEnabled"></SfCheckBox>
+            </Field>
+        </Fields>
+    </OXForm>
+</OXModal>
+
+

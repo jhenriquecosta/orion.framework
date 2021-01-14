@@ -1,0 +1,21 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Orion.Framework.App.Domain.Entities.Telefone, Orion.Framework.App.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="telefone">
+    <id name="Id" type="System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="id" />
+      <generator class="identity" />
+    </id>
+    <property access="backfield" name="Codigo" type="System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="codigo" not-null="true" />
+    </property>
+    <property access="backfield" name="CodigoDdd" type="System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="codigo_ddd" not-null="true" />
+    </property>
+    <property access="backfield" name="Numero" type="System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="numero" not-null="true" />
+    </property>
+    <many-to-one access="backfield" cascade="none" class="Orion.Framework.App.Domain.Entities.Pessoa, Orion.Framework.App.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" foreign-key="fk_telefone_pessoa" name="Pessoa" not-found="ignore">
+      <column name="pessoa_id" index="idx_fk_telefone_pessoa" />
+    </many-to-one>
+    <filter name="SoftDeleteFilter" />
+  </class>
+</hibernate-mapping>

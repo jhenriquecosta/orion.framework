@@ -1,0 +1,88 @@
+﻿
+@namespace Orion.Prometheus.Blazor.Pages
+@page "/sistemas/componentes/manager"
+@inherits SysComponenteManagerBase
+
+<OXPanel Title="COMPONENTS" SubTitle="Cria/Edita/Exclui COMPONENTS">
+    <Row>
+        <OXGridTree @ref="GridView"
+                    TModel="SysComponent"
+                    DataSource="GetAll"
+                    AllowButtons="true"
+                    AllowPrint="true"
+                    AllowFilter="true"
+                    ColumnIndex="0"
+                    ColumnFields="Path,IdInterno,Nome,Descricao"
+                    OnAdd="@(()=> OnManagerItemAsync(null,OxActionModel.New))"
+                    OnAddItem="@((value) => OnManagerItemAsync(value,OxActionModel.New))"
+                    OnEdit="@((value) => OnManagerItemAsync(value,OxActionModel.Edit))"
+                    OnRemove="@((value) => OnManagerItemAsync(value,OxActionModel.Delete))">
+        </OXGridTree>
+    </Row>
+</OXPanel>
+
+<OXModal @ref="ModalEdit" Caption="@Caption">
+    <OXForm ActionModel="@ActionModel" OnResetClick="@(() => OnHideModal(ModalEdit))" OnDeleteClick="@(() => OnDeleteAsync())" OnSaveClick="@(() => OnSaveOrUpdateAsync())">
+        <br />
+        <Fields>
+            <Field>
+                Id:<b>@PageModel?.Id</b>
+                <b>Informe os dados corretamente</b>
+            </Field>
+        </Fields>
+        <Fields>
+
+            <Field ColumnSize="ColumnSize.IsThird.OnDesktop">
+                <OXTextEdit Caption="Ancestral" Value="@AncestralPageModel?.Path" AllowEdit="false"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.IsThird.OnDesktop">
+                <OXTextEdit Caption="Componente" Value="@AncestralPageModel?.Nome" AllowEdit="false"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.IsThird.OnDesktop">
+                <OXTextEdit Caption="Path" Value="@PageModel.Path" AllowEdit="false"></OXTextEdit>
+            </Field>
+
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.Is4.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="@TipoComponente" @bind-Value="@PageModel.Nome"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is8.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Caption" @bind-Value="@PageModel.Caption"></OXTextEdit>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.IsFull.OnDesktop.IsHalf.OnMobile">
+                <OXTextEdit Caption="Descrição" @bind-Value="@PageModel.Descricao"></OXTextEdit>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.IsFull.OnDesktop.IsHalf.OnMobile">
+                <OXLookUpIcon DataSource="@Icons" Caption="Icon - Css" @bind-Value="@PageModel.IconCss"></OXLookUpIcon>
+            </Field>
+
+        </Fields>
+
+
+        <Fields>
+            <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                <OXTextEdit Caption="Área" @bind-Value="@PageModel.Area"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                <OXTextEdit AllowEdit="@(PageModel.Item != SysComponentItem.System)" Caption="Home" @bind-Value="@PageModel.Home"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                <OXTextEdit AllowEdit="@AllowEdit"  Caption="Target" @bind-Value="@PageModel.Target"></OXTextEdit>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                <OXTextEdit AllowEdit="@AllowEdit"  Caption="Restrição" @bind-Value="@PageModel.Restricao"></OXTextEdit>
+            </Field>
+        </Fields>
+        <Fields>
+            <Field ColumnSize="ColumnSize.IsFull.OnDesktop.IsHalf.OnMobile">
+                <SfCheckBox Label="Ativo ?" @bind-Checked="@PageModel.IsEnabled"></SfCheckBox>
+            </Field>
+        </Fields>
+    </OXForm>
+</OXModal>
+

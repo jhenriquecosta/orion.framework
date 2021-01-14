@@ -1,0 +1,14 @@
+﻿@namespace Framework.Web.Blazor.Components.Apex
+<!-- BEGIN : Footer-->
+@inherits XTLayoutComponentBase
+
+<footer class="footer footer-static footer-light">
+    <p class="clearfix text-muted text-sm-center px-2"><span>Copyright  &copy; 2019 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">@Company </a>, All rights reserved. </span></p>
+</footer>
+<!-- End : Footer-->
+@code
+{
+    [Parameter] public string Copyright { get; set; }
+    [Parameter] public string Url { get; set; }
+    [Parameter] public string Company { get; set; }
+}

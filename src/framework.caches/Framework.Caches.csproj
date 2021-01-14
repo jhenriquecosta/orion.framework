@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\build\common.props" />
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Description>helpers for caches application</Description>
+    <AssemblyName>Orion.Framework.Caches</AssemblyName>
+    <RootNamespace>Orion.Framework</RootNamespace>
+    <AssemblyTitle>Orion.Framework.Caches</AssemblyTitle>
+    <PackageId>Orion.Framework.Caches</PackageId>
+    <PackageTags>asp.net;asp.net mvc;boilerplate;application framework;web framework;framework;domain driven design</PackageTags>
+    <PackageReleaseNotes>helpers for caches applications</PackageReleaseNotes>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EasyCaching.CSRedis" Version="0.8.4" />
+    <PackageReference Include="EasyCaching.HybridCache" Version="0.8.3" />
+    <PackageReference Include="EasyCaching.InMemory" Version="0.8.4" />
+    <PackageReference Include="EasyCaching.Memcached" Version="0.8.3" />
+    <PackageReference Include="EasyCaching.SQLite" Version="0.8.3" />
+
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\framework\Framework.csproj" />
+  </ItemGroup>
+</Project>

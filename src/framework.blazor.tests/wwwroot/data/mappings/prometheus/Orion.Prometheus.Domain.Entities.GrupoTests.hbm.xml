@@ -1,0 +1,39 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Orion.Prometheus.Domain.Entities.GrupoTests, Orion.Prometheus.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="sys_tests_grupo">
+    <id name="Id" type="System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="id" />
+      <generator class="identity" />
+    </id>
+    <version name="Version" type="System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="version" not-null="true" />
+    </version>
+    <property access="backfield" name="Nome" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="nome" />
+    </property>
+    <property access="backfield" name="Descricao" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="descricao" />
+    </property>
+    <property access="backfield" name="IsDeleted" type="System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="is_deleted" not-null="true" />
+    </property>
+    <property access="backfield" name="DeletedOn" type="System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="deleted_on" not-null="false" sql-type="DATETIME" />
+    </property>
+    <property access="backfield" name="DeletedUser" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="deleted_user" />
+    </property>
+    <property access="backfield" name="ChangedOn" type="System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="changed_on" not-null="false" sql-type="DATETIME" />
+    </property>
+    <property access="backfield" name="ChangedUser" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="changed_user" />
+    </property>
+    <property access="backfield" name="CreatedOn" type="System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="created_on" not-null="false" sql-type="DATETIME" />
+    </property>
+    <property access="backfield" name="CreatedUser" type="System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+      <column name="created_user" />
+    </property>
+    <filter name="SoftDeleteFilter" />
+  </class>
+</hibernate-mapping>

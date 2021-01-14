@@ -1,0 +1,10 @@
+﻿@namespace Orion.Framework.Ui.Blazor.Components.OXSyncFusion
+@inherits OXButtonBase
+<SfButton HtmlAttributes="@HtmlAttributes"
+          Content="@Caption"
+           @onclick="@(() => OnClick.InvokeAsync(null))"
+           IconCss="@CssIcon"
+           CssClass="@CssClass"
+           Disabled="@Disable"
+           IsToggle="@IsToogle"
+           IsPrimary="@IsPrimary"></SfButton>

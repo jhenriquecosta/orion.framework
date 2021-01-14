@@ -1,0 +1,58 @@
+﻿@using ColumnType = Syncfusion.Blazor.Grids.ColumnType
+@namespace Orion.Framework.Ui.Blazor.Components.OXSyncFusion
+@typeparam TModel
+@inherits OXGridTreeBase<TModel>
+
+        @if (AllowButtons)
+        {
+            <Fields>
+                <Field>
+                    <FieldBody>
+                        <SfButton @onclick="@(() => OnAdd.InvokeAsync(null))" IsPrimary="true" IconCss="mdi mdi-database-plus mdi-18px">ADD Raiz</SfButton>
+                        <SfButton @onclick="@(() => OnAddItem.InvokeAsync(CurrentModel))" CssClass="e-btn e-info" IconCss="mdi mdi-database-plus mdi-18px">ADD Item</SfButton>
+                        <SfButton @onclick="@(() => OnEdit.InvokeAsync(CurrentModel))" IconCss="mdi mdi-database-edit mdi-18px">EDIT Item</SfButton>
+                        <SfButton @onclick="@(() => OnRemove.InvokeAsync(CurrentModel))" CssClass="e-btn e-warning" IconCss="mdi mdi-database-minus mdi-18px">DELETE</SfButton>
+                        @if (AllowButtonReport)
+                        {
+                            <SfButton @onclick="@(() => OnPrint.InvokeAsync(null))" IconCss="mdi mdi-cloud-print-outline mdi-18px">RELATÓRIO</SfButton>
+                        }
+                    </FieldBody>
+                </Field>
+            </Fields>
+        }
+        <Fields>
+
+         
+                <SfTreeGrid @ref="TreeGrid"
+                             TValue="TModel"
+                             DataSource="@GetDataSource"
+                             IdMapping="@ColumnId"
+                             ParentIdMapping="@ColumnParent"
+                             TreeColumnIndex="@ColumnIndex"
+                             AllowPaging="@AllowPaging"
+                             AllowFiltering="@AllowFilter"
+                             Toolbar=@Tool>
+
+                    <TreeGridEvents TValue="TModel" RowSelected="OnRowSelected"></TreeGridEvents>
+                    <TreeGridPageSettings PageSizes="@AllowPaging" PageCount="5" PageSize="10" PageSizeMode="PageSizeMode.Root"></TreeGridPageSettings>
+
+                    <TreeGridColumns>
+                        @{
+
+                            foreach (var column in GetColumnsFromModel)
+                            {
+
+                                <TreeGridColumn Field="@column.Field"
+                                                HeaderText="@column.Caption"
+                                                Type="@column.Type"
+                                                IsPrimaryKey="@column.IsPrimaryKey"
+                                                DisplayAsCheckBox="@column.IsCheckBox"
+                                                Format="@column.Format">
+                                </TreeGridColumn>
+                                }
+                            }
+                        </TreeGridColumns>
+                    </SfTreeGrid>
+            
+        </Fields>
+    

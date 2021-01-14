@@ -1,0 +1,5 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <filter-def name="OrganizationFilter" condition="OrganizationCode = :orgCode">
+    <filter-param name="orgCode" type="Int32" />
+  </filter-def>
+</hibernate-mapping>
